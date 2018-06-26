@@ -8,21 +8,40 @@ function firstThing(){
     p.textContent = t1.value
 }
 
-function secondThing(){
-    const p = document.querySelector('#c2')
-    p.textContent = t2.value
+// function secondThing(){
+//     const p = document.querySelector('#c2')
+//     p.textContent = t2.value
+// }
+
+// b1.addEventListener('click', firstThing)
+// b2.addEventListener('click', secondThing)
+
+// t1.addEventListener('keypress', function(event) {
+//     if (event.keyCode == 13) {
+//         b1.click()
+//         event.preventDefault()
+//     }})
+// t2.addEventListener('keypress', function(event) {
+//     if (event.keyCode == 13) {
+//         b2.click()
+//         event.preventDefault()
+//     }})
+
+const form = document.querySelector('form#flickForm')
+
+const addToList = function(ev) {
+  ev.preventDefault()
+  const f = ev.target
+
+  const flickName = f.flickName.value
+  const rating = f.rating.value
+  const item = document.createElement('li')
+  item.textContent = flickName+" :"+rating
+
+  const list = document.querySelector('#flicks')
+  list.appendChild(item)
+
+  f.reset()
 }
 
-b1.addEventListener('click', firstThing)
-b2.addEventListener('click', secondThing)
-
-t1.addEventListener('keypress', function(event) {
-    if (event.keyCode == 13) {
-        b1.click()
-        event.preventDefault()
-    }})
-t2.addEventListener('keypress', function(event) {
-    if (event.keyCode == 13) {
-        b2.click()
-        event.preventDefault()
-    }})
+form.addEventListener('submit', addToList)
