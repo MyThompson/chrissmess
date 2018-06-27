@@ -6,3 +6,8 @@ button {
     background-color:rgb(67, 255, 138);
     color:maroon;
 }
+
+.title {
+    color:maroon;
+    font-style:italic;
+}

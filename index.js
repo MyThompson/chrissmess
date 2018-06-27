@@ -44,6 +44,10 @@ const addToList = function(ev) {
   item.appendChild(title)
   item.appendChild(rate)
 
+  var att = document.createAttribute('class');
+  att.value = 'title'
+  title.setAttributeNode(att);
+
   const list = document.querySelector('#flicks')
   list.appendChild(item)
 
