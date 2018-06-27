@@ -29,7 +29,12 @@ function firstThing(){
 
 const form = document.querySelector('form#flickForm')
 
-const addToList = function(ev) {
+const addToList = function(item){
+  const list = document.querySelector('#flicks')
+  list.appendChild(item)
+}
+
+const createItem = function(ev) {
   ev.preventDefault()
   const f = ev.target
 
@@ -48,10 +53,9 @@ const addToList = function(ev) {
   att.value = 'title'
   title.setAttributeNode(att);
 
-  const list = document.querySelector('#flicks')
-  list.appendChild(item)
+  addToList(item)
 
   f.reset()
 }
 
-form.addEventListener('submit', addToList)
+form.addEventListener('submit', createItem)
