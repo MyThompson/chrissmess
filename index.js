@@ -36,7 +36,13 @@ const addToList = function(ev) {
   const flickName = f.flickName.value
   const rating = f.rating.value
   const item = document.createElement('li')
-  item.textContent = flickName+" :"+rating
+  const title = document.createElement('span')
+  const rate = document.createElement('span')
+  
+  title.textContent = flickName
+  rate.textContent = ', Rating: '+rating
+  item.appendChild(title)
+  item.appendChild(rate)
 
   const list = document.querySelector('#flicks')
   list.appendChild(item)
