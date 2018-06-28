@@ -8,32 +8,30 @@
     <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
 </head>
 <body>
+    <header>
     <h1>Chrismess</h1>
     <h2>A mess of Chrisses...</h2>
-    <!-- <p id=c1>Lotsa Chrisses</p>
-    <p id=c2>More Chrisses</p>
-
-    <input id=t1 autofocus>Enter a Chris</input><br> -->
-    <!-- <input id=t2>Enter more Chris</input><br> -->
-    <!-- <button id=b1>update text</button>-->
-    <!-- <button id=b2>update other one</button> -->
+    </header>
 
     <form id="flickForm">
-        <input
-          type="text"
-          name="flickName"
-          placeholder="Enter a Chris Flick"
-          autofocus
-        >
-        <input
-          type="text"
-          name="rating"
-          placeholder="Enter Chris Rating"
-        >
-        <button type="submit">Add Flick</button>
-    </form>
-    
-    <ul id="flicks"></ul>
+    <div>
+      <input
+        type="text"
+        name="flickName"
+        placeholder="Enter a Chris flick"
+        autofocus
+      >
+      <input
+        class="smaller"
+        type="text"
+        name="chrisName"
+        placeholder="Enter Chris rating"
+      >
+      <button type="submit">Add Flick</button>
+    </div>
+  </form>
+
+  <ul id="flicks"></ul>
     
     <script src="index.js"></script>
 </body>
