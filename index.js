@@ -1,14 +1,24 @@
-
-let flickArray = new Array
-let num = 0
-
 class App {
   constructor() {
+    this.list = document.querySelector('#flicks')
+    this.flicks = []
+    this.load()
+
     const form = document.querySelector('form#flickForm')
     form.addEventListener('submit', (ev) => {
       ev.preventDefault()
       this.handleSubmit(ev)
     })
+  }
+
+  save() {
+    localStorage.setItem('flicks', JSON.stringify(this.flicks))
+  }
+
+  load() {
+    const flicks = JSON.parse(localStorage.getItem('flicks'))
+
+    flicks.forEach(flick => this.addFlick(flick))
   }
 
   renderProperty(name, value) {
@@ -18,39 +28,78 @@ class App {
     return span
   }
 
-  renderItem(flick) {
-    const item = document.createElement('li')
-    item.classList.add('flick')
-
-    const del = document.createElement('button')
-    del.textContent = 'delete'
-    del.classList.add('num')
-    num++
+  renderProperties(flick) {
+    const div = document.createElement('div')
+    div.classList.add('info')
 
     const properties = Object.keys(flick)
 
     properties.forEach((propertyName) => {
       const span = this.renderProperty(propertyName, flick[propertyName])
-      item.appendChild(span)
-      item.appendChild(del)
+      div.appendChild(span)
     })
 
+    return div
+  }
+
+  renderActionButtons(flick, item) {
+    const actions = document.createElement('div')
+    actions.classList.add('actions')
+
+    const deleteButton = document.createElement('button')
+    deleteButton.classList.add('remove')
+    deleteButton.textContent = 'delete'
+    deleteButton
+      .addEventListener(
+        'click',
+        (_ev) => this.removeFlick(flick, item)
+      )
+    actions.appendChild(deleteButton)
+
+    return actions
+  }
+
+  renderItem(flick) {
+    const item = document.createElement('li')
+    item.classList.add('flick')
+
+    const properties = this.renderProperties(flick)
+    item.appendChild(properties)
+
+    const actions = this.renderActionButtons(flick, item)
+    item.appendChild(actions)
+
     return item
+  }
+
+  removeFlick(flick, item) {
+    this.list.removeChild(item)
+
+    const i = this.flicks.indexOf(flick)
+    this.flicks.splice(i, 1)
+
+    this.save()
+  }
+
+  addFlick(flick) {
+    this.flicks.push(flick)
+    this.save()
+
+
+    const item = this.renderItem(flick)
+
+    this.list.appendChild(item)
   }
 
   handleSubmit(ev) {
     const f = ev.target
 
     const flick = {
-      title: f.flickName.value,
+      name: f.flickName.value,
       chris: f.chrisName.value,
     }
 
-    const item = this.renderItem(flick)
-
-    const list = document.querySelector('#flicks')
-    list.appendChild(item)
-    flickArray.push(item)
+    this.addFlick(flick)
 
     f.reset()
     f.flickName.focus()
